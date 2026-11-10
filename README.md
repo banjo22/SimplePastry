@@ -24,16 +24,16 @@ npm run preview
 ## Supabase einmalig einrichten
 
 1. Ein eigenes Supabase-Projekt anlegen. Die SQL-Datei `supabase/001_schema.sql` **einmal vollständig** im SQL-Editor ausführen. Sie ist eine initiale Migration, kein wiederholt ausführbares Reset-Skript.
-   Wenn `001_schema.sql` bereits ausgeführt wurde, für die Sortierung zusätzlich `supabase/002_reorder.sql` einmal ausführen.
-2. Öffentliche Registrierung in den Auth-Einstellungen deaktivieren. Einen einzigen Benutzer mit E-Mail und starkem Passwort im Supabase-Dashboard anlegen und die E-Mail bestätigen. Diesen gemeinsamen Haushaltszugang auf allen Geräten verwenden. Keine anonymen Anmeldungen aktivieren.
-3. Die Benutzer-UUID aus Auth → Users übernehmen und im SQL-Editor einsetzen:
+   Wenn `001_schema.sql` bereits ausgeführt wurde, für die Sortierung zusätzlich `supabase/002_reorder.sql` und `supabase/004_product_reorder.sql` einmal ausführen.
+2. Öffentliche Registrierung in den Auth-Einstellungen deaktivieren. Benutzer mit E-Mail und starkem Passwort im Supabase-Dashboard anlegen und die E-Mail bestätigen. Keine anonymen Anmeldungen aktivieren.
+3. Für mehrere Benutzer zuerst `supabase/003_multiple_household_users.sql` einmal ausführen. Danach die Benutzer-UUID aus Auth → Users übernehmen und im SQL-Editor einsetzen:
 
 ```sql
-insert into public.household_access (singleton, user_id)
-values (true, 'HIER-DIE-UUID-DES-HAUSHALTSBENUTZERS');
+insert into public.household_access (user_id)
+values ('HIER-DIE-UUID-DES-BENUTZERS');
 ```
 
-Die Tabelle erlaubt genau einen Haushalt. **Nur dieser konkrete Auth-Benutzer** darf Daten lesen oder Aktionen ausführen. Ein beliebiger anderer angemeldeter Benutzer erhält keinen Zugriff.
+Alle Benutzer in `household_access` dürfen auf denselben Haushalt zugreifen. Ein beliebiger anderer angemeldeter Benutzer erhält keinen Zugriff.
 
 4. `.env.example` nach `.env.local` kopieren und beide Werte setzen:
 
