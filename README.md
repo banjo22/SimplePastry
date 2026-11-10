@@ -24,7 +24,7 @@ npm run preview
 ## Supabase einmalig einrichten
 
 1. Ein eigenes Supabase-Projekt anlegen. Die SQL-Datei `supabase/001_schema.sql` **einmal vollständig** im SQL-Editor ausführen. Sie ist eine initiale Migration, kein wiederholt ausführbares Reset-Skript.
-   Wenn `001_schema.sql` bereits ausgeführt wurde, für die Sortierung zusätzlich `supabase/002_reorder.sql` und `supabase/004_product_reorder.sql` einmal ausführen.
+   Wenn `001_schema.sql` bereits ausgeführt wurde, für die Sortierung zusätzlich `supabase/002_reorder.sql`, `supabase/004_product_reorder.sql` und `supabase/005_product_drag_reorder.sql` einmal ausführen.
 2. Öffentliche Registrierung in den Auth-Einstellungen deaktivieren. Benutzer mit E-Mail und starkem Passwort im Supabase-Dashboard anlegen und die E-Mail bestätigen. Keine anonymen Anmeldungen aktivieren.
 3. Für mehrere Benutzer zuerst `supabase/003_multiple_household_users.sql` einmal ausführen. Danach die Benutzer-UUID aus Auth → Users übernehmen und im SQL-Editor einsetzen:
 
